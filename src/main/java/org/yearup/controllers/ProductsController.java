@@ -77,11 +77,10 @@ public class ProductsController
 
     @PutMapping("{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public void updateProduct(@PathVariable int id, @RequestBody Product product)
-    {
+    public void updateProduct(@PathVariable int id, @RequestBody Product product)  {
         try
         {
-            productDao.update(product);
+            productDao.update(id, product);
         }
         catch(Exception ex)
         {
