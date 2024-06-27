@@ -43,26 +43,27 @@ public class CategoriesController {
         return categoryDao.getAllCategories();
     }
 
-    // add the appropriate annotation for a get action
+    @GetMapping("{id}")
+    @PreAuthorize("permitAll()")
     public Category getById(@PathVariable int id) {
-
         Category category = categoryDao.getById(id);
         if (category == null ) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         return category; //get the category by id
     }
-        
 
 
     // the url to return all products in category 1 would look like this
     // https://localhost:8080/categories/1/products
+
     @GetMapping("{categoryId}/products")
-    public List<Product> getProductsById(@PathVariable int categoryId)
-    {
-        // get a list of product by categoryId
-        return null;
+    @PreAuthorize("permitAll()")
+    public List<Product> getProductsById(@PathVariable int categoryId) {
+        return productDao.listByCategoryId(categoryId);        // get a list of product by categoryId
+
     }
+
 
     // add annotation to call this method for a POST action
     // add annotation to ensure that only an ADMIN can call this function
