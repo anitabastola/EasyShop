@@ -44,11 +44,16 @@ public class CategoriesController {
     }
 
     // add the appropriate annotation for a get action
-    public Category getById(@PathVariable int id)
-    {
-        // get the category by id
-        return null;
+    public Category getById(@PathVariable int id) {
+
+        Category category = categoryDao.getById(id);
+        if (category == null ) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        return category; //get the category by id
     }
+        
+
 
     // the url to return all products in category 1 would look like this
     // https://localhost:8080/categories/1/products
