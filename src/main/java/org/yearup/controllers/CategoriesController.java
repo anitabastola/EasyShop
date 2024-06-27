@@ -25,11 +25,10 @@ public class CategoriesController {
     private final ProductDao productDao;
 
 
-
     // create an Autowired controller to inject the categoryDao and ProductDao
     // add the appropriate annotation for a get action
     @Autowired
-    public CategoriesController(CategoryDao categoryDao, ProductDao productDao){
+    public CategoriesController(CategoryDao categoryDao, ProductDao productDao) {
 
         this.categoryDao = categoryDao;
         this.productDao = productDao;
@@ -37,8 +36,7 @@ public class CategoriesController {
 
     @GetMapping
     @PreAuthorize("permitAll()")
-    public List<Category> getAll()
-    {
+    public List<Category> getAll() {
         // find and return all categories
         return categoryDao.getAllCategories();
     }
@@ -47,7 +45,7 @@ public class CategoriesController {
     @PreAuthorize("permitAll()")
     public Category getById(@PathVariable int id) {
         Category category = categoryDao.getById(id);
-        if (category == null ) {
+        if (category == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         return category; //get the category by id
@@ -67,24 +65,36 @@ public class CategoriesController {
 
     // add annotation to call this method for a POST action
     // add annotation to ensure that only an ADMIN can call this function
-    public Category addCategory(@RequestBody Category category)
-    {
-        // insert the category
-        return null;
+    @PostMapping
+    @ResponseStatus
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public Category addCategory(@RequestBody Category category) {
+        try {
+            return categoryDao.create(category);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
+
 
     // add annotation to call this method for a PUT (update) action - the url path must include the categoryId
     // add annotation to ensure that only an ADMIN can call this function
-    public void updateCategory(@PathVariable int id, @RequestBody Category category)
-    {
-        // update the category by id
+    public void updateCategory(@PathVariable int id, @RequestBody Category category) {
+        try {
+            categoryDao.update(id, category);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+
+        }
     }
 
 
     // add annotation to call this method for a DELETE action - the url path must include the categoryId
     // add annotation to ensure that only an ADMIN can call this function
-    public void deleteCategory(@PathVariable int id)
-    {
-        // delete the category by id
+    @DeleteMapping("{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public void deleteCategory(@PathVariable int id) {
+
+
     }
 }
