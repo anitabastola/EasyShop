@@ -96,8 +96,8 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     public Product getById(int productId)
     {
         String sql = "SELECT * FROM products WHERE product_id = ?";
-        try (Connection connection = getConnection())
-        {
+        try (Connection connection = getConnection()) {
+
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, productId);
 
@@ -116,14 +116,14 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     }
 
     @Override
-    public Product create(Product product)
-    {
+    public Product create(Product product) {
 
         String sql = "INSERT INTO products(name, price, category_id, description, color, image_url, stock, featured) " +
                 " VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
-        try (Connection connection = getConnection())
-        {
+        try (Connection connection = getConnection()) {
+
+
             PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, product.getName());
             statement.setBigDecimal(2, product.getPrice());
@@ -170,8 +170,7 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
                 "   , featured = ? " +
                 " WHERE product_id = ?;";
 
-        try (Connection connection = getConnection())
-        {
+        try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, product.getName());
             statement.setBigDecimal(2, product.getPrice());
@@ -211,8 +210,8 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
         }
     }
 
-    protected static Product mapRow(ResultSet row) throws SQLException
-    {
+    protected static Product mapRow(ResultSet row) throws SQLException {
+
         int productId = row.getInt("product_id");
         String name = row.getString("name");
         BigDecimal price = row.getBigDecimal("price");
