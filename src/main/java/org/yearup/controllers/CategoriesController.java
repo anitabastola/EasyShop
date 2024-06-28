@@ -69,7 +69,7 @@ public class CategoriesController {
 
         @PostMapping()
         @PreAuthorize("hasRole('ROLE_ADMIN')")
-        public Category addCategory (@RequestBody Category category) {
+        public Category addCategory(@RequestBody Category category) {
 
             try {
                 return categoryDao.create(category);
@@ -86,7 +86,7 @@ public class CategoriesController {
         public void updateCategory(@PathVariable int id, @RequestBody Category category){
             try {
                 categoryDao.update(id, category);
-            } catch (Exception ex) {
+            } catch (Exception e) {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
 
             }
@@ -97,9 +97,9 @@ public class CategoriesController {
         // add annotation to ensure that only an ADMIN can call this function
         @DeleteMapping("{id}")
         @PreAuthorize("hasRole('ROLE_ADMIN')")
-        public void deleteCategory ( @PathVariable int id) {
+        public void deleteCategory (@PathVariable int id) {
             try {
-                var category = categoryDao.getById(id);
+                Category category = categoryDao.getById(id);
 
                 if (category == null)
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND);
