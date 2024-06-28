@@ -1,7 +1,9 @@
 # Project Title
+The Project Title is EasyShop. 
+
 ## Description of the Project
 Briefly describe what this Java console application does. Mention its purpose and who the intended users are. Explain the main functionality and what problems it aims to solve.
-![Class Diagram](path/to/your/class_diagram.png)
+
 ## User Stories
 List the user stories that guided the development of your application. Format these stories as: "As a [type of user], I want [some goal] so that [some reason]."
 - As a user, I want to be able to input my data, so that the application can process it accordingly.
@@ -22,8 +24,10 @@ Follow these steps to get your application running within IntelliJ IDEA:
 - Java: Mention the version you are using.
 - Any additional libraries or frameworks used in the project.
 ## Demo
-Include screenshots or GIFs that show your application in action. Use tools like [Giphy Capture](https://giphy.com/apps/giphycapture) to record a GIF of your application.
-![Application Screenshot](path/to/your/screenshot.png)
+![img.png](img.png)
+![img_1.png](img_1.png)
+![img_2.png](img_2.png)
+
 ## Future Work
 Outline potential future enhancements or functionalities you might consider adding:
 - Additional feature to be developed.

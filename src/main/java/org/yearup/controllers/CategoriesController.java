@@ -17,7 +17,7 @@ import java.util.List;
 // http://localhost:8080/categories
 // add annotation to allow cross site origin requests
 @RestController
-@RequestMapping
+@RequestMapping("/categories")
 @CrossOrigin
 
 public class CategoriesController {
@@ -35,39 +35,33 @@ public class CategoriesController {
     }
 
     @GetMapping
-    @PreAuthorize("permitAll()")
     public List<Category> getAll() {
         // find and return all categories
-        try {
-            return categoryDao.getAllCategories();
 
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+            return categoryDao.getAllCategories();
         }
 
-    }
 
-    @GetMapping("{id}")
-    @PreAuthorize("permitAll()")
+
+    @GetMapping("/{id}")
     public Category getById(@PathVariable int id) {
-        try {
+
             Category category = categoryDao.getById(id);
 
 
-            if (category == null)
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-
-            return category; //get the category by id
-        }
-            catch(Exception e) {
-                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
+            if (category == null) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found with id: " + id);
             }
+
+            return category;
         }
+
 
 
 
 
         @PostMapping()
+        @ResponseStatus(value = HttpStatus.CREATED)
         @PreAuthorize("hasRole('ROLE_ADMIN')")
         public Category addCategory(@RequestBody Category category) {
 
@@ -81,21 +75,20 @@ public class CategoriesController {
 
         // add annotation to call this method for a PUT (update) action - the url path must include the categoryId
         // add annotation to ensure that only an ADMIN can call this function
-        @PutMapping("{id}")
+        @PutMapping("/{id}")
         @PreAuthorize("hasRole('ROLE_ADMIN')")
         public void updateCategory(@PathVariable int id, @RequestBody Category category){
-            try {
                 categoryDao.update(id, category);
-            } catch (Exception e) {
-                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
 
-            }
+
+
         }
 
 
         // add annotation to call this method for a DELETE action - the url path must include the categoryId
         // add annotation to ensure that only an ADMIN can call this function
         @DeleteMapping("{id}")
+        @ResponseStatus(value = HttpStatus.NO_CONTENT)
         @PreAuthorize("hasRole('ROLE_ADMIN')")
         public void deleteCategory (@PathVariable int id) {
             try {
