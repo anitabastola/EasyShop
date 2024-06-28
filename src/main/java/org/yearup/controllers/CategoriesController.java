@@ -17,7 +17,7 @@ import java.util.List;
 // http://localhost:8080/categories
 // add annotation to allow cross site origin requests
 @RestController
-@RequestMapping
+@RequestMapping ("categories")
 @CrossOrigin
 
 public class CategoriesController {
@@ -38,12 +38,19 @@ public class CategoriesController {
     @PreAuthorize("permitAll()")
     public List<Category> getAll() {
         // find and return all categories
-        return categoryDao.getAllCategories();
+        try {
+            return categoryDao.getAllCategories();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @GetMapping("{id}")
     @PreAuthorize("permitAll()")
     public Category getById(@PathVariable int id) {
+        
         Category category = categoryDao.getById(id);
         if (category == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -66,7 +73,6 @@ public class CategoriesController {
     // add annotation to call this method for a POST action
     // add annotation to ensure that only an ADMIN can call this function
     @PostMapping
-    @ResponseStatus
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Category addCategory(@RequestBody Category category) {
         try {
@@ -94,7 +100,20 @@ public class CategoriesController {
     @DeleteMapping("{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void deleteCategory(@PathVariable int id) {
+        try {
+            var category = categoryDao.getById(id);
 
+            if (category == null) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            }
+            categoryDao.delete(id);
+
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
+
 }
+
