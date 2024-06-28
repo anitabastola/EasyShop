@@ -2,14 +2,17 @@
 The Project Title is EasyShop. 
 
 ## Description of the Project
-The website offers login capabilities for both administrators and regular users. Additionally, it provides customizable
-filters for browsing products, ensuring convenient display of prices and images. 
+The website offers login capabilities for both administrators and regular users. The EasyShop website offers users the ability to explore products in diverse categories, add items to their shopping carts, and seamlessly proceed through checkout to place orders. Its user interface (UI) is fully operational, featuring essential functions such as user registration, login, category-based product browsing, and robust search and filtering capabilities. Ongoing development will focus on optimizing the backend Spring Boot Java API.Testing is carried out using Postman and scripts. Developers ensure API functionality and compatibility by configuring Postman collections, scripting in JavaScript, and analyzing results. This API Application relies on Postman testing to ensure application endpoints and logic are fully functional.
 
 
 ## User Stories
 List the user stories that guided the development of your application. Format these stories as: "As a [type of user], I want [some goal] so that [some reason]."
 - As a user, I want to be able to input my data, so that the application can process it accordingly.
-- As a user, I want to receive immediate feedback, so I can understand what to do next.
+- As a user, I want to manage products, including adding, updating, and deleting them.
+- As a user, I want to manage categories, including adding, updating, and deleting them.
+- As a user, I want to search for products based on category, price range, and color.
+- As a user,  I want to browse products by category and view details of specific products.
+- As a user, I want to be able to detect the bugs in order to make the website run properly.
 ### Prerequisites
 
 To install this application, use IntelliJ along with MySQL Workbench. Follow the provided link and select an installation 
