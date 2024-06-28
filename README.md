@@ -28,6 +28,7 @@ Follow these steps to get your application running within IntelliJ IDEA:
 3. After the project opens, wait for IntelliJ to index the files and set up the project.
 4. Find the main class with the `public static void main(String[] args)` method.
 5. Right-click on the file and select 'Run 'YourMainClassName.main()'' to start the application.
+
 ## Technologies Used
 -The application framework uses variety of technologies and tools, including:
 
@@ -47,8 +48,8 @@ Java SDK: Make sure Java SDK is installed and configured in IntelliJ.
 
 ## Future Work
 Outline potential future enhancements or functionalities you might consider adding:
-- Additional feature to be developed.
-- Improvement of current functionalities.
+-  Implement a rating and review system for the products.
+- Work on Shopping Cart and have the checkout function.
 ## Resources
 List resources such as tutorials, articles, or documentation that helped you during the project.
 - https://github.com/RayMaroun/yearup-spring-section-6-2024/tree/main/pluralsight/java-development/workbook-9/NorthwindTradersAPI6
